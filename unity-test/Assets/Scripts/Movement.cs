@@ -49,6 +49,6 @@ public class Movement : MonoBehaviour {
 
 
         //strafing is slower than moving forward (mimicing real life mecanum)
-        transform.position += (zMovement * zCam * speed + xMovement * xCam * speed / 1.5) * Time.deltaTime;
+        transform.position += (zMovement * zCam * speed + xMovement * xCam * speed / 1.5F) * Time.deltaTime;
     }
 }
