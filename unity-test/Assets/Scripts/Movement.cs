@@ -7,7 +7,7 @@ public class Movement : MonoBehaviour {
     private float xRotation;
 
     private float zMovement;
-    private Vector3 movement;
+    private float xMovement;
 
     public float speed = 5;
     public float rotationSpeed = 90;
@@ -31,20 +31,24 @@ public class Movement : MonoBehaviour {
         transform.rotation = Quaternion.Euler(0, heading, 0);
 
 
-        //Moving morward and backward (W/S)
+        //Movement
         zMovement = Input.GetAxis("Vertical");
-        xMovement = Input.GetAxis();
-        Vector3 direction = transform.forward;
+        xMovement = Input.GetAxis("CHorizontal");
+
+        Vector3 zCam = transform.forward;
+        Vector3 xCam = transform.right;
 
 
         //Makes it so that y values get reset (the y rotation of the camera won't impact the direction)
-        direction.y = 0;
+        zCam.y = 0;
+        xCam.y = 0;
 
         //Not sure what this actually does, but the tutorial I looked at said it was necessary
-        direction = direction.normalized;
+        xCam = xCam.normalized;
+        zCam = zCam.normalized;
 
 
-        transform.position += (zMovement * direction) * Time.deltaTime * speed;
-        //transform.position += movement * Time.deltaTime;
+        //strafing is slower than moving forward (mimicing real life mecanum)
+        transform.position += (zMovement * zCam * speed + xMovement * xCam * speed / 1.5) * Time.deltaTime;
     }
 }
