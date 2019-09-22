@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour {
 
-    private static float xMovement;
-    private static float zMovement;
-    Vector3 movement;
+    private float xMovement;
+    private float zMovement;
+    private Vector3 movement;
+
+    public Transform camera;
 
     /*
     // Start is called before the first frame update
@@ -20,7 +22,13 @@ public class Movement : MonoBehaviour {
         xMovement = Input.GetAxis("Horizontal");
         zMovement = Input.GetAxis("Vertical");
 
-        movement = new Vector3(xMovement, 0, zMovement);
-        transform.position += movement * Time.deltaTime;
+        //movement = new Vector3(xMovement, 0, zMovement);
+
+        Vector3 camZ = camera.forward;
+        Vector3 camX = camera.right;
+
+
+        transform.position += (zMovement * camZ + xMovement * camX) * Time.deltaTime;
+        //transform.position += movement * Time.deltaTime;
     }
 }
