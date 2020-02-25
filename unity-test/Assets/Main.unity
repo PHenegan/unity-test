@@ -96,6 +96,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
+    m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -145,8 +146,9 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 771394658}
   m_Enabled: 1
-  serializedVersion: 9
+  serializedVersion: 10
   m_Type: 1
+  m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
   m_Intensity: 1
   m_Range: 10
@@ -248,7 +250,7 @@ Terrain:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1108550813}
   m_Enabled: 1
-  serializedVersion: 5
+  serializedVersion: 6
   m_TerrainData: {fileID: 15600000, guid: 2cca554394631384bb8c20c947faaa5a, type: 2}
   m_TreeDistance: 5000
   m_TreeBillboardDistance: 50
@@ -271,6 +273,7 @@ Terrain:
   m_ScaleInLightmap: 0.0256
   m_LightmapParameters: {fileID: 15203, guid: 0000000000000000f000000000000000, type: 0}
   m_GroupingID: 0
+  m_RenderingLayerMask: 1
   m_AllowAutoConnect: 1
 --- !u!4 &1108550816
 Transform:
@@ -319,8 +322,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e497f8b97063b4e45a531faa9504cbfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  rotationSpeed: 90
+  maxSpeed: 5
+  acceleration: 1
+  decceleration: 5
+  rotationSpeed: 180
   heading: 0
 --- !u!54 &1740592750
 Rigidbody:
@@ -365,6 +370,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

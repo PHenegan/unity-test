@@ -9,7 +9,13 @@ public class Movement : MonoBehaviour {
     private float zMovement;
     private float xMovement;
 
-    public float speed = 5;
+    public float maxSpeed = 5;
+    private float currentSpeed = 0;
+
+    public float acceleration = 1;
+    private float currentAccel;
+
+    public float decceleration = 5;
     public float rotationSpeed = 90;
 
     //Not sure what this actually does, I copied it from a tutorial
@@ -33,22 +39,34 @@ public class Movement : MonoBehaviour {
 
         //Movement
         zMovement = Input.GetAxis("Vertical");
-        xMovement = Input.GetAxis("CHorizontal");
+        //xMovement = Input.GetAxis("CHorizontal");
 
         Vector3 zCam = transform.forward;
-        Vector3 xCam = transform.right;
+        //Vector3 xCam = transform.right;
 
+        //sets acceleration and decceleration
+        if (zMovement != 0)
+        {
+            currentSpeed += acceleration * Time.deltaTime;
+        }
+        else if (zMovement == 0 && currentSpeed != 0) {
+            currentSpeed -= decceleration * Time.deltaTime;
+        }
+        else if (zMovement == 0 || currentSpeed <= 0) {
+            currentSpeed = 0;
+        }
+        
 
         //Makes it so that y values get reset (the y rotation of the camera won't impact the direction)
         zCam.y = 0;
-        xCam.y = 0;
+        //xCam.y = 0;
 
         //Not sure what this actually does, but the tutorial I looked at said it was necessary
-        xCam = xCam.normalized;
+        //xCam = xCam.normalized;
         zCam = zCam.normalized;
 
 
-        //strafing is slower than moving forward (mimicing real life mecanum)
-        transform.position += (zMovement * zCam * speed + xMovement * xCam * speed / 1.5F) * Time.deltaTime;
+        
+        transform.position += (zMovement * zCam * currentSpeed) * Time.deltaTime;
     }
 }
